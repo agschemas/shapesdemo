@@ -10,7 +10,7 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
 <Experiments/1>
     rdfs:label "my first experiment" ;
-    agschema:testType "prospective randomized double-blind" ;
+    agschema:testType "gin trial" ;
     agschema:entryNumber 1 ;
     agschema:brand "Adama" ;
     agschema:testSubject <Varieties/2>,  <Varieties/3> ;

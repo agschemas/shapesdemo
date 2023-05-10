@@ -41,7 +41,7 @@ start = @:Experiment
 # TODO: no refs
 :Experiment {
     rdfs:label xsd:string ;
-    agschema:testType xsd:string ;
+    agschema:testType ["gin trial" "variety" "agronomic"] ;
     agschema:entryNumber xsd:integer ;
     agschema:brand xsd:string ;
     agschema:testSubject @:Variety + ;
@@ -79,40 +79,38 @@ start = @:Experiment
 }
 
 :Production {
-    dct:identifier xsd:integer ;
-    agschema:plantingDate xsd:date ;
-    agschema:harvestDate xsd:date ;
+    dct:identifier              xsd:integer ;
+    agschema:plantingDate       xsd:date ;
+    agschema:harvestDate        xsd:date ;
     agschema:seedingRatePerAcre xsd:decimal ;
-    agschema:percentBallOpened xsd:decimal ;
-    agschema:weather @:Weather ;
-    agschema:substrate @:Soil ;
-    agschema:location @:ProductionLocation ;
-    agschema:careAndFeeding @:Lot ;
-    agschema:observedResult @:ProductionCrop * ;
+    agschema:percentBallOpened  xsd:decimal ;
+    agschema:weather            @:Weather ;
+    agschema:substrate          @:Soil ;
+    agschema:location           @:ProductionLocation ;
+    agschema:careAndFeeding     @:Lot ;
+    agschema:observedResult     @:ProductionCrop * ;
 }
 
-/*
- */
 :ProductionCrop {
-    agschema:yield @:Yield ;
-    agschema:hviColor         @:HviColor ;
-    agschema:leaf             @:Leaf ;
-    agschema:staple           @:Staple ;
-    agschema:length           @:Length ;
-    agschema:lintFraction     @:LintFraction ;
-    agschema:specificStrength @:Strength ;
-    agschema:micronaire       @:Micronaire ;
-    agschema:lengthUniformity @:LengthUniformity ;
-    agschema:stormtolerance   @:BaseStormTolerance ;
+    agschema:yield              @:Yield ;
+    agschema:hviColor           @:HviColor ;
+    agschema:leaf               @:Leaf ;
+    agschema:staple             @:Staple ;
+    agschema:length             @:Length ;
+    agschema:lintFraction       @:LintFraction ;
+    agschema:specificStrength   @:Strength ;
+    agschema:micronaire         @:Micronaire ;
+    agschema:lengthUniformity   @:LengthUniformity ;
+    agschema:stormtolerance     @:BaseStormTolerance ;
 
     /*
-    agschema:elongation       @:Elongation ;
-    agschema:ext              @:Ext ;
-    agschema:colorRd          @:ColorRd ;
-    agschema:colorb           @:Colorb ;
-    agschema:trashArea        @:TrashArea ;
-    agschema:lintYield        @:LintYield ;
-    agschema:valueperac       @:ValuePerAcre ;
+    agschema:elongation         @:Elongation ;
+    agschema:ext                @:Ext ;
+    agschema:colorRd            @:ColorRd ;
+    agschema:colorPlusB         @:ColorPlusB ;
+    agschema:trashArea          @:TrashArea ;
+    agschema:lintYield          @:LintYield ;
+    agschema:valueperac         @:ValuePerAcre ;
     */
 }
 
