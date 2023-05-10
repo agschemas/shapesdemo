@@ -1,0 +1,7 @@
+---
+- schemaLabel: Cotton
+  schemaURL: cotton-schema.shex
+  dataLabel: experiment 1
+  dataURL: cotton-experiment-1.ttl
+  queryMap: <Experiments/1>@:Experiment
+  status: conformant

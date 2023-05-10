@@ -1,0 +1,154 @@
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://nal.example/schema#>
+PREFIX agschema: <http://agschemas.org/>
+
+PREFIX ucum: <https://ucum.org/ucum>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+
+PREFIX nalt: <https://lod.nal.usda.gov/nalt/>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX unit: <http://qudt.org/vocab/unit/>
+
+start = @:Experiment
+
+/* Scalar values used throughout schema
+ * "LITERAL" indicates we don't know units
+ */
+:HviColor LITERAL
+:Leaf LITERAL
+:Staple xsd:decimal
+:Length xsd:decimal
+:LintFraction xsd:decimal
+:Strength xsd:decimal
+:Micronaire xsd:decimal
+:LengthUniformity xsd:decimal
+:BaseStormTolerance [0 1 2 3 4 5 6 7 8 9]
+:Elongation xsd:decimal
+:Ext LITERAL
+:ColorRd LITERAL
+:Colorb LITERAL
+:TrashArea xsd:decimal
+:LintYield xsd:decimal
+:ValuePerAcre xsd:decimal
+:FertilizerAmount xsd:decimal
+:HarvestWeight xsd:decimal
+:TempMeasurement ucum:C
+:Precipitation ucum:cm
+:Yield xsd:decimal
+
+# TODO: no refs
+:Experiment {
+    rdfs:label xsd:string ;
+    agschema:testType xsd:string ;
+    agschema:entryNumber xsd:integer ;
+    agschema:brand xsd:string ;
+    agschema:testSubject @:Variety + ;
+    agschema:test @:Test ;
+}
+
+:Variety {
+    rdfs:label xsd:string ;
+    agschema:exepctedResults @:VarietySpec
+}
+
+:VarietySpec {
+    agschema:yield @:Yield ;
+    agschema:hviColor @:HviColor ;
+    agschema:leaf @:Leaf ;
+    agschema:staple @:Staple ;
+    agschema:length @:Length ;
+    agschema:lintFraction @:LintFraction ;
+    agschema:specificStrength @:Strength ;
+    agschema:micronaire @:Micronaire ;
+    agschema:lengthUniformity @:LengthUniformity ;
+    agschema:stormtolerance @:BaseStormTolerance ;
+    agschema:elongation @:Elongation ;
+}
+
+:Test {
+    rdfs:label [@en @es]+ ;
+    agschema:testedIn @:Treatment * ;
+    agschema:produced @:Production + ;
+}
+
+:Treatment {
+    rdfs:label xsd:string ;
+    rdfs:description xsd:string ;
+}
+
+:Production {
+    dct:identifier xsd:integer ;
+    agschema:plantingDate xsd:date ;
+    agschema:harvestDate xsd:date ;
+    agschema:seedingRatePerAcre xsd:decimal ;
+    agschema:percentBallOpened xsd:decimal ;
+    agschema:weather @:Weather ;
+    agschema:substrate @:Soil ;
+    agschema:location @:ProductionLocation ;
+    agschema:careAndFeeding @:Lot ;
+    agschema:observedResult @:ProductionCrop * ;
+}
+
+/*
+ */
+:ProductionCrop {
+    agschema:yield @:Yield ;
+    agschema:hviColor         @:HviColor ;
+    agschema:leaf             @:Leaf ;
+    agschema:staple           @:Staple ;
+    agschema:length           @:Length ;
+    agschema:lintFraction     @:LintFraction ;
+    agschema:specificStrength @:Strength ;
+    agschema:micronaire       @:Micronaire ;
+    agschema:lengthUniformity @:LengthUniformity ;
+    agschema:stormtolerance   @:BaseStormTolerance ;
+
+    /*
+    agschema:elongation       @:Elongation ;
+    agschema:ext              @:Ext ;
+    agschema:colorRd          @:ColorRd ;
+    agschema:colorb           @:Colorb ;
+    agschema:trashArea        @:TrashArea ;
+    agschema:lintYield        @:LintYield ;
+    agschema:valueperac       @:ValuePerAcre ;
+    */
+}
+
+:Soil {
+    agschema:product xsd:string ;
+    agschema:trait xsd:string ;
+    agschema:soil IRI ;
+    agschema:dateOfTillage xsd:date ;
+}
+
+:Weather {
+    agschema:minTemp @:TempMeasurement ;
+    agschema:maxTemp @:TempMeasurement ;
+    agschema:precipitation @:Precipitation ;
+    # agschema:cloudCover . # KT removed - not in dataset
+}
+
+:Lot {
+    agschema:dateOfIrrigation       xsd:date + ;
+    agschema:irrigationType         xsd:string ;
+    agschema:fertilizerAmount       @:FertilizerAmount ;
+    agschema:fertilizationDate      xsd:date + ;
+    agschema:defoliationDate        xsd:date + ;
+    agschema:harvestType            xsd:string ;
+    agschema:harvestDate            xsd:date ;
+    agschema:harvestWeight          @:HarvestWeight ;
+}
+
+:ProductionLocation {
+    geo:location @geo:Point ;
+    agschema:city [@en @es] ;
+    agschema:county [@en @es] ;
+    agschema:state ["TX" "AL" "AZ" "AR" "CA" "CO"] ;
+}
+
+geo:Point {
+    geo:lat xsd:decimal ;
+    geo:long xsd:decimal
+}
