@@ -1,0 +1,103 @@
+
+PREFIX : <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
+:Production  {
+    dct:identifier xsd:integer;
+    agschema:plantingDate xsd:date;
+    agschema:harvestDate xsd:date;
+    agschema:seedingRatePerAcre xsd:decimal;
+    agschema:percentBallOpened xsd:decimal;
+    agschema:weather @:Weather;
+    agschema:substrate :Soil;
+    agschema:location @:Lot;
+    agschema:observedResult @:ProductionCrop {0,}
+}
+:ExperimentShape  {
+    rdfs:label xsd:string;
+    agschema:testType xsd:string;
+    agschema:entryNumber xsd:integer;
+    agschema:brand xsd:string;
+    :testSubject @:Variety {1,};
+    agschema:test @:Test
+}
+:Test  {
+    :id @:Id;
+    :testedIn @:Treatment {0,};
+    :produced @:Production {1,}
+}
+:Variety  {
+    rdfs:label xsd:string;
+    agschema:expectedResults @:VarietySpec
+}
+:VarietySpec  {
+    schema:yield @:Yield;
+    agschema:hviColor LITERAL;
+    agschema:leaf LITERAL;
+    :staple xsd:decimal;
+    agschema:length xsd:decimal;
+    agschema:lintFraction xsd:decimal;
+    agschema:specificStrength xsd:decimal;
+    :micronaire xsd:decimal;
+    :lengthUniformity xsd:decimal;
+    :stormTolerance @:BaseStormTolerance;
+    :elongation LITERAL xsd:decimal
+}
+:Treatment  {
+    rdfs:label xsd:string;
+    rdfs:description xsd:string
+}
+:ProductionCrop  {
+    schema:yield @:Yield;
+    agschema:hviColor @:HviColor;
+    agschema:leaf LITERAL;
+    agschema:staple xsd:decimal;
+    agschema:length xsd:decimal;
+    agschema:lintFraction xsd:decimal;
+    agschema:specificStrength xsd:decimal;
+    agschema:micronaire xsd:decimal;
+    agschema:lengthUniformity @:LengthUniformity;
+    agschema:stormtolerance @:BaseStormTolerance;
+    agschema:elongation LITERAL xsd:decimal;
+    agschema:ext LITERAL;
+    agschema:colorRd LITERAL;
+    agschema:colorb LITERAL;
+    agschema:trashArea xsd:decimal;
+    agschema:lintYield xsd:decimal;
+    agschema:valueperac xsd:decimal
+}
+:Soil  {
+    example:product xsd:string;
+    example:trait xsd:string;
+    example:soil IRI;
+    example:dateOfTillage xsd:date
+}
+:Weather  {
+    example:minTemp ucum:c;
+    example:maxTemp ucum:c;
+    example:precipitation ucum:cm
+}
+:Lot  {
+    agschema:dateOfIrrigation xsd:date;
+    agschema:irrigationType xsd:string;
+    agschema:fertilizerAmount xsd:decimal;
+    agschema:fertilizationDate xsd:date;
+    agschema:defoliationDate xsd:date;
+    agschema:harvestType xsd:string;
+    agschema:harvestDate xsd:date;
+    agschema:harvestWeight xsd:decimal
+}
+:ProductionLocation  {
+    geo:location geo:Point;
+    schema:latitude xsd:decimal;
+    schema:longitude xsd:decimal;
+    schema:city  .  ;
+    schema:county  .  ;
+    schema:state  .  
+}
+:Point  {
+    geo:lat xsd:decimal;
+    geo:long xsd:decimal
+}
