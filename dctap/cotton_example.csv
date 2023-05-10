@@ -5,7 +5,7 @@ shapeID,start,propertyID,valueNodeType,valueDataType,minoccurs,maxoccurs,valueSh
 ,,agschema:seedingRatePerAcre,,xsd:decimal,,,
 ,,agschema:percentBallOpened,,xsd:decimal,,,
 ,,agschema:weather,,,,,:Weather
-,,agschema:substrate,,:Soil,,,
+,,agschema:substrate,,,,,:Soil
 ,,agschema:location,,,,,:Lot
 ,,agschema:observedResult,,,0,-1,:ProductionCrop
 :ExperimentShape,,rdfs:label,,xsd:string,,,
