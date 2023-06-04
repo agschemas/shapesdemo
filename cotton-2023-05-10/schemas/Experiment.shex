@@ -15,16 +15,60 @@ start = @<#Experiment>
 
 <#Experiment> {
     rdfs:label xsd:string ;
-    agschema:testType ["gin trial" "variety" "agronomic"] ;
+    agschema:testType @<#TestType> ;
     agschema:entryNumber xsd:integer ;
     agschema:brand xsd:string ;
-    agschema:testSubject @<Cotton.shex#Variety> + ;
     agschema:test @<#Test> ;
 }
 
 <#Test> {
-    rdfs:label [@en @es]+ ;
-    agschema:testedIn @<Cotton.shex#Treatment> * ;
-    agschema:produced @<Cotton.shex#Production> + ;
+    dct:identifier IRI ;
+    agschema:corpus @<#Sample> + ;
+    agschema:blockedIn @<#Block> + ;
 }
 
+<#Block> {
+    dct:identifier . ;
+    rdfs:description xsd:string ? ;
+    agschema:condition @<#TestCondition> + ;
+}
+
+<#TestCondition> {
+    rdfs:description xsd:string ;
+    agschema:var IRI ;
+    agschema:value . ;
+}
+
+# <#TODO_TestType> []
+<#TestType> [agschema:~]
+
+ABSTRACT <#Sample> {
+    dct:identifier              xsd:integer ;
+    agschema:weather            @<#Weather> ;
+    agschema:location           @<#Location> ;
+    agschema:exepctedResults    @<#ReferenceSpec> * ;
+}
+
+ABSTRACT <#ReferenceSpec> { }
+
+<#Weather> {
+    agschema:minTemp @<#TempMeasurement> ;
+    agschema:maxTemp @<#TempMeasurement> ;
+    agschema:precipitation @<#Precipitation> ;
+    # agschema:cloudCover . # KT removed - not in dataset
+}
+
+<#TempMeasurement> ucum:C
+<#Precipitation> ucum:cm
+
+<#Location> {
+    geo:location @geo:Point ;
+    agschema:city [@en @es] ;
+    agschema:county [@en @es] ;
+    agschema:state ["TX" "AL" "AZ" "AR" "CA" "CO"] ;
+}
+
+geo:Point {
+    geo:lat xsd:decimal ;
+    geo:long xsd:decimal
+}

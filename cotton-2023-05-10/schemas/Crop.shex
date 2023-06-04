@@ -13,3 +13,35 @@ PREFIX unit: <http://qudt.org/vocab/unit/>
 
 IMPORT <Experiment.shex>
 
+<#FertilizerAmount> xsd:decimal
+<#HarvestWeight> xsd:decimal
+
+ABSTRACT <#CropSample> EXTENDS @<Experiment.shex#Sample> {
+    agschema:cultivar xsd:string ;
+    agschema:plantingDate       xsd:date ;
+    agschema:harvestDate        xsd:date ;
+    agschema:seedingRatePerAcre xsd:decimal ;
+
+    agschema:substrate          @<#Soil> ;
+    agschema:careAndFeeding     @<#Lot> ;
+}
+
+<#Soil> {
+    agschema:product xsd:string ;
+    agschema:trait xsd:string ;
+    agschema:soil IRI ;
+    agschema:dateOfTillage xsd:date ;
+}
+
+<#Lot> {
+    agschema:dateOfIrrigation       xsd:date + ;
+    agschema:irrigationType         xsd:string ;
+    agschema:fertilizerAmount       @<#FertilizerAmount> ;
+    agschema:fertilizationDate      xsd:date + ;
+    agschema:defoliationDate        xsd:date + ;
+    agschema:harvestType            xsd:string ;
+    agschema:harvestDate            xsd:date ;
+    agschema:harvestWeight          @<#HarvestWeight> ;
+}
+
+ABSTRACT <#CropSpec> EXTENDS @<Experiment.shex#ReferenceSpec> { }

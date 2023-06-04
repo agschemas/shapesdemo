@@ -18,7 +18,7 @@ start = @<Experiment.shex#Experiment>
 /* Scalar values used throughout schema
  * "LITERAL" indicates we don't know units
  */
-<#HviColor> LITERAL
+<#HviColor> xsd:integer
 <#Leaf> LITERAL
 <#Staple> xsd:decimal
 <#Length> xsd:decimal
@@ -34,18 +34,13 @@ start = @<Experiment.shex#Experiment>
 <#TrashArea> xsd:decimal
 <#LintYield> xsd:decimal
 <#ValuePerAcre> xsd:decimal
-<#FertilizerAmount> xsd:decimal
-<#HarvestWeight> xsd:decimal
-<#TempMeasurement> ucum:C
-<#Precipitation> ucum:cm
 <#Yield> xsd:decimal
 
-<#Variety> {
-    rdfs:label xsd:string ;
-    agschema:exepctedResults @<#VarietySpec>
-}
+# <#TODO_CottonTestType> EXTENDS @<Experiment.shex#TestType> [
+#     agschema:GinTest agshema:variety agshema:agronomic
+# ]
 
-<#VarietySpec> {
+<#CottonSpec> EXTENDS @<Crop.shex#CropSpec> {
     agschema:yield @<#Yield> ;
     agschema:hviColor @<#HviColor> ;
     agschema:leaf @<#Leaf> ;
@@ -59,25 +54,8 @@ start = @<Experiment.shex#Experiment>
     agschema:elongation @<#Elongation> ;
 }
 
-<#Treatment> {
-    rdfs:label xsd:string ;
-    rdfs:description xsd:string ;
-}
-
-<#Production> {
-    dct:identifier              xsd:integer ;
-    agschema:plantingDate       xsd:date ;
-    agschema:harvestDate        xsd:date ;
-    agschema:seedingRatePerAcre xsd:decimal ;
+<#CottonSample> EXTENDS @<Crop.shex#CropSample> {
     agschema:percentBallOpened  xsd:decimal ;
-    agschema:weather            @<#Weather> ;
-    agschema:substrate          @<#Soil> ;
-    agschema:location           @<#ProductionLocation> ;
-    agschema:careAndFeeding     @<#Lot> ;
-    agschema:observedResult     @<#ProductionCrop> * ;
-}
-
-<#ProductionCrop> {
     agschema:yield              @<#Yield> ;
     agschema:hviColor           @<#HviColor> ;
     agschema:leaf               @<#Leaf> ;
@@ -100,39 +78,11 @@ start = @<Experiment.shex#Experiment>
     */
 }
 
-<#Soil> {
-    agschema:product xsd:string ;
-    agschema:trait xsd:string ;
-    agschema:soil IRI ;
-    agschema:dateOfTillage xsd:date ;
+<#ProductionCrop> {
 }
 
-<#Weather> {
-    agschema:minTemp @<#TempMeasurement> ;
-    agschema:maxTemp @<#TempMeasurement> ;
-    agschema:precipitation @<#Precipitation> ;
-    # agschema:cloudCover . # KT removed - not in dataset
-}
+# <#Variety> {
+#     rdfs:label xsd:string ;
+#     agschema:exepctedResults @<#CottonSpec>
+# }
 
-<#Lot> {
-    agschema:dateOfIrrigation       xsd:date + ;
-    agschema:irrigationType         xsd:string ;
-    agschema:fertilizerAmount       @<#FertilizerAmount> ;
-    agschema:fertilizationDate      xsd:date + ;
-    agschema:defoliationDate        xsd:date + ;
-    agschema:harvestType            xsd:string ;
-    agschema:harvestDate            xsd:date ;
-    agschema:harvestWeight          @<#HarvestWeight> ;
-}
-
-<#ProductionLocation> {
-    geo:location @geo:Point ;
-    agschema:city [@en @es] ;
-    agschema:county [@en @es] ;
-    agschema:state ["TX" "AL" "AZ" "AR" "CA" "CO"] ;
-}
-
-geo:Point {
-    geo:lat xsd:decimal ;
-    geo:long xsd:decimal
-}

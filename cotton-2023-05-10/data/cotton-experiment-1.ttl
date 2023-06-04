@@ -10,70 +10,87 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
 <Experiments/1>
     rdfs:label "2023-15 Master Files" ;
-    agschema:testType "gin trial" ;
+    agschema:testType agschema:GinTest ; # extend TestTypes value set
     agschema:entryNumber 1 ;
-    agschema:brand "Adama" ;
-    agschema:testSubject <Varieties/2>,  <Varieties/3> ;
+    agschema:brand "@@Adama" ;
     agschema:test <Tests/5> .
-
-<Varieties/2>
-    rdfs:label "ad-2018" ;
-    agschema:exepctedResults <VarietySpecs/4> .
-
-<Varieties/3>
-    rdfs:label "ad-2023" ;
-    agschema:exepctedResults <VarietySpecs/4> .
 
 <VarietySpecs/4>
     agschema:yield 30.0 ;
-    agschema:hviColor "5LM" ;
-    agschema:leaf 4 ;
-    agschema:staple 81.0 ;
-    agschema:length 1.1 ;
+    agschema:hviColor 31 ;
+    agschema:leaf 3 ;
+    agschema:staple 36.0 ;
+    agschema:length 1.11 ;
     agschema:lintFraction .25 ;
-    agschema:specificStrength 25.0 ;
-    agschema:micronaire 4.2 ;
-    agschema:lengthUniformity .9 ;
+    agschema:specificStrength 31.6 ;
+    agschema:micronaire 4.0 ;
+    agschema:lengthUniformity 82.5 ;
     agschema:stormtolerance 5 ;
     agschema:elongation 6.0 .
 
 <Tests/5>
-    rdfs:label "lowPhosphatesHighWater"@en ;
-    agschema:testedIn
-      <Treatments/lowPhosphates> ,
-      <Treatments/earlyWater> ;
-    agschema:produced <Productions/5run1> .
+    dct:identifier <Tests/5> ;
+    agschema:corpus <Samples/1> ;
+    agschema:blockedIn <Blocks/1> . # 2,3,4...
 
-<Treatments/lowPhosphates>
-    rdfs:label "lowPhosphates" ;
-    rdfs:description "minimum amount of phosphates" .
+<Blocks/1>
+    dct:identifier 1 ;
+    rdfs:description "TRT 1 = full size saw gin, machine picked" ;
+    agschema:condition <2D>, <2E>, <2F>, <2G>, <2X> .
 
-<Treatments/earlyWater>
-    rdfs:label "earlyWater" ;
-    rdfs:description "irrigate before signs of wilting" .
+<2D>
+    rdfs:description "cultivar" ;
+    agschema:var agschema:cultivar ;
+    agschema:value "NG4545" .
 
-<Productions/5run1>
-    dct:identifier 1234 ;
+<2E>
+    rdfs:description "full-size saw gin" ;
+    agschema:var agschema:gin ;
+    agschema:value agschema:Saw .
+
+<2F>
+    rdfs:description "machine picked" ;
+    agschema:var agschema:harvestMethod ;
+    agschema:value agschema:MachinePicker .
+
+<2G>
+    rdfs:description "machine-cleaned" ;
+    agschema:var agschema:gin ;
+    agschema:value agschema:MachineCleaner .
+
+<2X>
+    rdfs:description "LC" ;
+    agschema:var agschema:lc ;
+    agschema:value false .
+
+<Samples/1>
+    dct:identifier 123 ;
+    agschema:weather <Weather/79331-2008-15> ;
+    agschema:location <Location/79331-51> ;
+    agschema:exepctedResults <VarietySpecs/4> ;
+
+    agschema:cultivar "NG4545" ;
     agschema:plantingDate "2008-03-15"^^xsd:date ;
     agschema:harvestDate "2008-08-15"^^xsd:date ;
+    agschema:harvestMethod agschema:MachinePicker ;
+  # agschema:harvestWeigth ??? ;
     agschema:seedingRatePerAcre 52700.0 ;
-    agschema:percentBallOpened 90.0 ;
-    agschema:weather <Weather/79331-2008-15> ;
     agschema:substrate <Soils/7> ;
-    agschema:location <Location/79331-51> ;
     agschema:careAndFeeding <Lots/79331-51-2008-05> ;
-    agschema:observedResult <Products/79331-2008-15> .
 
-<Products/79331-2008-15>
+    agschema:gin agschema:Saw ;
+    agschema:cleaning agschema:MachineCleaner ;
+    agschema:lc false ;
+    agschema:percentBallOpened 90.0 ;
     agschema:yield 30.0 ;
-    agschema:hviColor "5LM" ;
-    agschema:leaf 4 ;
-    agschema:staple 81.0 ;
-    agschema:length 1.1 ;
+    agschema:hviColor 31 ;
+    agschema:leaf 3 ;
+    agschema:staple 36.0 ;
+    agschema:length 1.11 ;
     agschema:lintFraction .25 ;
-    agschema:specificStrength 25.0 ;
-    agschema:micronaire 4.2 ;
-    agschema:lengthUniformity .9 ;
+    agschema:specificStrength 31.6 ;
+    agschema:micronaire 4.0 ;
+    agschema:lengthUniformity 82.5 ;
     agschema:stormtolerance 5 ;
     agschema:elongation 6.0 .
 
@@ -107,3 +124,11 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 <Points/LaMesa-Tx>
     geo:lat 32.7457 ;
     geo:long -101.9396 .
+
+# <Varieties/2>
+#     rdfs:label "ad-2018" ;
+#     agschema:exepctedResults <VarietySpecs/4> .
+# 
+# <Varieties/3>
+#     rdfs:label "ad-2023" ;
+#     agschema:exepctedResults <VarietySpecs/4> .
