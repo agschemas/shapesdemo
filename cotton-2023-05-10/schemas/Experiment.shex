@@ -1,0 +1,30 @@
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+# PREFIX : <http://nal.example/schema#>
+PREFIX agschema: <http://agschemas.org/>
+
+PREFIX ucum: <https://ucum.org/ucum>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+
+PREFIX nalt: <https://lod.nal.usda.gov/nalt/>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX unit: <http://qudt.org/vocab/unit/>
+
+start = @<#Experiment>
+
+<#Experiment> {
+    rdfs:label xsd:string ;
+    agschema:testType ["gin trial" "variety" "agronomic"] ;
+    agschema:entryNumber xsd:integer ;
+    agschema:brand xsd:string ;
+    agschema:testSubject @<Cotton.shex#Variety> + ;
+    agschema:test @<#Test> ;
+}
+
+<#Test> {
+    rdfs:label [@en @es]+ ;
+    agschema:testedIn @<Cotton.shex#Treatment> * ;
+    agschema:produced @<Cotton.shex#Production> + ;
+}
+

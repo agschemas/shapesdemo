@@ -9,7 +9,7 @@ PREFIX ucum: <https://ucum.org/ucum>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
 <Experiments/1>
-    rdfs:label "my first experiment" ;
+    rdfs:label "2023-15 Master Files" ;
     agschema:testType "gin trial" ;
     agschema:entryNumber 1 ;
     agschema:brand "Adama" ;
