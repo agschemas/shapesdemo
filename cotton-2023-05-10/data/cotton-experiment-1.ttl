@@ -30,7 +30,7 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
 <Tests/5>
     dct:identifier <Tests/5> ;
-    agschema:corpus <Samples/1> ;
+    agschema:corpus <Samples/1>, <Samples/2> ;
     agschema:blockedIn <Blocks/1> . # 2,3,4...
 
 <Blocks/1>
@@ -65,7 +65,12 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
 <Samples/1>
     dct:identifier 123 ;
-    agschema:weather <Weather/79331-2008-15> ;
+    agschema:weather
+      <Weather/79331-2008-04> ,
+      <Weather/79331-2008-05> ,
+      <Weather/79331-2008-06> ,
+      <Weather/79331-2008-07> ,
+      <Weather/79331-2008-08> ;
     agschema:location <Location/79331-51> ;
     agschema:exepctedResults <VarietySpecs/4> ;
 
@@ -100,10 +105,30 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     agschema:soil <http://id.example/soil1> ;
     agschema:dateOfTillage "2008-03-15"^^xsd:date .
 
-<Weather/79331-2008-15>
+<Weather/79331-2008-04>
+    agschema:minTemp "4"^^ucum:C ;
+    agschema:maxTemp "21"^^ucum:C ;
+    agschema:precipitation "10"^^ucum:cm .
+
+<Weather/79331-2008-05>
+    agschema:minTemp "5"^^ucum:C ;
+    agschema:maxTemp "22"^^ucum:C ;
+    agschema:precipitation "8"^^ucum:cm .
+
+<Weather/79331-2008-06>
+    agschema:minTemp "6"^^ucum:C ;
+    agschema:maxTemp "23"^^ucum:C ;
+    agschema:precipitation "6"^^ucum:cm .
+
+<Weather/79331-2008-07>
+    agschema:minTemp "7"^^ucum:C ;
+    agschema:maxTemp "24"^^ucum:C ;
+    agschema:precipitation "4"^^ucum:cm .
+
+<Weather/79331-2008-08>
     agschema:minTemp "8"^^ucum:C ;
     agschema:maxTemp "25"^^ucum:C ;
-    agschema:precipitation "10"^^ucum:cm .
+    agschema:precipitation "2"^^ucum:cm .
 
 <Location/79331-51>
     geo:location <Points/LaMesa-Tx> ;
@@ -132,3 +157,90 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 # <Varieties/3>
 #     rdfs:label "ad-2023" ;
 #     agschema:exepctedResults <VarietySpecs/4> .
+
+<Samples/2>
+    dct:identifier 123 ;
+    agschema:weather
+      <Weather/79332-2008-04> ,
+      <Weather/79332-2008-05> ,
+      <Weather/79332-2008-06> ,
+      <Weather/79332-2008-07> ,
+      <Weather/79332-2008-08> ;
+    agschema:location <Location/79332-51> ;
+    agschema:exepctedResults <VarietySpecs/4> ;
+
+    agschema:cultivar "NG4545" ;
+    agschema:plantingDate "2008-03-15"^^xsd:date ;
+    agschema:harvestDate "2008-08-15"^^xsd:date ;
+    agschema:harvestMethod agschema:MachinePicker ;
+  # agschema:harvestWeigth ??? ;
+    agschema:seedingRatePerAcre 52700.0 ;
+    agschema:substrate <Soils/8> ;
+    agschema:careAndFeeding <Lots/79332-51-2008-05> ;
+
+    agschema:gin agschema:Saw ;
+    agschema:cleaning agschema:MachineCleaner ;
+    agschema:lc false ;
+    agschema:percentBallOpened 90.0 ;
+    agschema:yield 30.0 ;
+    agschema:hviColor 31 ;
+    agschema:leaf 3 ;
+    agschema:staple 36.0 ;
+    agschema:length 1.11 ;
+    agschema:lintFraction .25 ;
+    agschema:specificStrength 31.6 ;
+    agschema:micronaire 4.0 ;
+    agschema:lengthUniformity 82.5 ;
+    agschema:stormtolerance 5 ;
+    agschema:elongation 6.0 .
+
+<Soils/8>
+    agschema:product "red clay" ;
+    agschema:trait "red clay" ;
+    agschema:soil <http://id.example/soil1> ;
+    agschema:dateOfTillage "2008-03-13"^^xsd:date .
+
+<Weather/79332-2008-04>
+    agschema:minTemp "9"^^ucum:C ;
+    agschema:maxTemp "21"^^ucum:C ;
+    agschema:precipitation "10"^^ucum:cm .
+
+<Weather/79332-2008-05>
+    agschema:minTemp "5"^^ucum:C ;
+    agschema:maxTemp "22"^^ucum:C ;
+    agschema:precipitation "8"^^ucum:cm .
+
+<Weather/79332-2008-06>
+    agschema:minTemp "5"^^ucum:C ;
+    agschema:maxTemp "23"^^ucum:C ;
+    agschema:precipitation "6"^^ucum:cm .
+
+<Weather/79332-2008-07>
+    agschema:minTemp "5"^^ucum:C ;
+    agschema:maxTemp "24"^^ucum:C ;
+    agschema:precipitation "4"^^ucum:cm .
+
+<Weather/79332-2008-08>
+    agschema:minTemp "5"^^ucum:C ;
+    agschema:maxTemp "25"^^ucum:C ;
+    agschema:precipitation "2"^^ucum:cm .
+
+<Location/79332-51>
+    geo:location <Points/LaMesa2-Tx> ;
+    agschema:city "Lamesa"@en ;
+    agschema:county "Dawson"@en ;
+    agschema:state "TX" .
+
+<Lots/79332-51-2008-05>
+    agschema:dateOfIrrigation  "2008-04-15"^^xsd:date, "2008-05-15"^^xsd:date ;
+    agschema:irrigationType    "hose" ;
+    agschema:fertilizerAmount  7.0 ;
+    agschema:fertilizationDate "2008-02-15"^^xsd:date ;
+    agschema:defoliationDate   "2008-04-15"^^xsd:date, "2008-05-15"^^xsd:date ;
+    agschema:harvestType       "old school" ;
+    agschema:harvestDate       "2008-08-15"^^xsd:date ;
+    agschema:harvestWeight     11000.0 .
+
+<Points/LaMesa2-Tx>
+    geo:lat 32.7447 ;
+    geo:long -101.9406 .
