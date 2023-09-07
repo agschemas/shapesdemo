@@ -1,3 +1,11 @@
+# is harvest weight more sensitive to coldest temp or average low temp?
+# sparql -d data/cotton-experiment-1.ttl query/weather.srq -8
+# ┌─────────────┬─────────────┬───────────────────────────────────────────────────────┐
+# │ ?minMinTemp │ ?avgMinTemp │ ?weight                                               │
+# │           5 │         5.8 │ "11000.0"^^<http://www.w3.org/2001/XMLSchema#decimal> │
+# │           4 │         6.0 │ "10000.0"^^<http://www.w3.org/2001/XMLSchema#decimal> │
+# └─────────────┴─────────────┴───────────────────────────────────────────────────────┘
+
 BASE <http://instance.example/>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -8,16 +16,27 @@ PREFIX agschema: <http://agschemas.org/>
 PREFIX ucum: <https://ucum.org/ucum>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
-SELECT ?minTemp ?weight {
+SELECT ?minMinTemp ?avgMinTemp ?weight {
+  # across all samples in all experiments on NG4545
   ?exp agschema:test [
     agschema:corpus ?sample ;    
   ] .
   ?sample
     agschema:cultivar "NG4545" ;
-    agschema:careAndFeeding ?lot ;
-    agschema:weather ?weather .
+    agschema:careAndFeeding ?lot .
+
+  # get the harvest weight
   ?lot
     agschema:harvestWeight ?weight .
-  ?weather
-    agschema:minTemp ?minTemp .
+
+  # and aggregate the lows temperatures for every period.
+  { SELECT ?sample
+           (MIN (xsd:float(STR(?minTemp1))) AS ?minMinTemp)
+           (AVG (xsd:float(STR(?minTemp1))) AS ?avgMinTemp)
+    {
+      ?sample
+        agschema:weather ?weather .
+      ?weather
+        agschema:minTemp ?minTemp1 .
+    } GROUP BY ?sample }
 }
